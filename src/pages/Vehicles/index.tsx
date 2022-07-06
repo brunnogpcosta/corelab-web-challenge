@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getVehicles } from "../../lib/api";
 import { Button, Card, Search } from "../../components";
@@ -32,15 +32,53 @@ const VehiclesPage = () => {
   return (
     <div className={styles.Vehicles}>
       <main className={styles.main}>
-        <Search placeholder="Buscar" value={search} onChange={() => {}} />
+        <Search placeholder="Buscar" value={search} onChange={() => { }} />
 
         <Button text="Adicionar" onClick={navigateToAdd} />
 
-        <Card title="Sandero Stepway">
-          <p>Price: 22000</p>
-          <p>Description: Carro usado por 2 anos...</p>
-          <p>Year: 2018</p>
-        </Card>
+        <div className={styles.ContainerCardVehicles}>
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+
+          <Card title="Sandero Stepway">
+            <p>Price: 22000</p>
+            <p>Description: Carro usado por 2 anos...</p>
+            <p>Year: 2018</p>
+          </Card>
+        </div>
       </main>
     </div>
   );

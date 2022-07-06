@@ -2,13 +2,20 @@
 
 .Vehicles {
   display: grid;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
 
   .main {
     display: grid;
     gap: 1rem;
     width: 100%;
   }
+
+  .ContainerCardVehicles{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:baseline;
+  }
+  
 
   @include tablet {
 
