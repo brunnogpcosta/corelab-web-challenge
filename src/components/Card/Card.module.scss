@@ -1,5 +1,5 @@
 .Card {
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
@@ -7,8 +7,8 @@
   background-color: #d1d1d1;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
 
   &:hover,
   &:focus,
@@ -19,7 +19,7 @@
 
   h2 {
     margin: 0 1rem 1rem 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   p {
@@ -37,7 +37,7 @@
   
   
   img{
-    width: 26px;
+    width: 24px;
     margin-right: 5px;
     cursor: pointer;
 
@@ -46,6 +46,19 @@
     &:active {
       filter: invert(29%) sepia(98%) saturate(3645%) hue-rotate(201deg) brightness(99%) contrast(103%);
     }
+
+  
+
+  }
+
+  @media(max-width: 800px) {
+  
+    img{
+      width: 20px;
+      margin-right: 0px;
+      
+    }
+  
   }
 }
 

@@ -2,7 +2,8 @@
 
 .Vehicles {
   display: grid;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+
 
   .main {
     display: grid;
@@ -10,26 +11,30 @@
     width: 100%;
   }
 
-  .ContainerCardVehicles{
+  .ContainerCardVehicles {
+ 
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
-    justify-content:baseline;
-  }
-  
+    justify-content: baseline;
+    margin: 0 auto;
+    margin-top: 30px;
 
-  @include tablet {
-
-  }
-
-  @include laptop {
-
-  }
-
-  @include desktop {
+    @media(max-width: 800px) {
+      width: 100%;
+    }
+    
 
   }
 
-  @include desktop-large {
 
-  }
+
+
+  @include tablet {}
+
+  @include laptop {}
+
+  @include desktop {}
+
+  @include desktop-large {}
 }
