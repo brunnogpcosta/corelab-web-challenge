@@ -1,11 +1,8 @@
 import styled from 'styled-components'
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 import icoSearch from '../../assets/Search.svg'
 import icoFilter from '../../assets/filter.png'
-
-
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +40,6 @@ interface ISearch {
 }
 
 const Search = (props: ISearch) => {
-
   const navigate = useNavigate()
 
   const navigateToFilter = () => {
@@ -52,10 +48,16 @@ const Search = (props: ISearch) => {
   };
 
 
+  const handleChangeValue = (value: string) => {
+    console.log("Search String:", value)
+
+    // Incluir filtro
+  }
+
   return (
     <Container>
       <SearchImg src={icoSearch}></SearchImg>
-      <Input type="text" placeholder={props.placeholder} value={props.value} ></Input>
+      <Input type="text" placeholder={props.placeholder} onChange={event => handleChangeValue(event.target.value)}></Input>
 
       <ButtonFilter onClick={navigateToFilter}>
         <img src={icoFilter}></img>
