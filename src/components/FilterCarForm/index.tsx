@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
+import { useNavigate } from "react-router-dom";
 
 import icoArrow from '../../assets/Arrow.svg'
 
@@ -10,7 +11,7 @@ const ContainerFilterCarForm = styled.div`
     background-color: rgba(255, 255, 255, 0.7);
     margin: 0 auto;
     display: flex;
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
     align-content: center;
 
@@ -24,7 +25,6 @@ const ContainerFilterCarForm = styled.div`
       
 
         input{
-       
             border-radius: 100px;
             border: 1px solid;
             padding: 5px 20px 5px 20px;
@@ -105,15 +105,23 @@ const BackButton = styled.button`
     cursor: pointer;
 `
 
-
 const FilterCarForm = () => {
+    const navigate = useNavigate()
+
+
+    const navigateToHome = () => {
+        //navigate to /
+        navigate('/');
+      };
+    
+
     return (
         <>
-            <BackButton>
+            <BackButton onClick={navigateToHome}>
                 <img src={icoArrow}></img>
             </BackButton>
-            <ContainerFilterCarForm>
 
+            <ContainerFilterCarForm>
                 <form action="">
                     <label>Marca: <br />
                         <select id="marca" name="marca">

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import icoArrow from '../../assets/Arrow.svg'
 
@@ -76,9 +77,17 @@ const BackButton = styled.button`
 
 
 const NewCarForm = () => {
+    const navigate = useNavigate()
+
+    const navigateToHome = () => {
+        //navigate to /
+        navigate('/');
+    };
+
+
     return (
         <>
-            <BackButton>
+            <BackButton onClick={navigateToHome}>
                 <img src={icoArrow}></img>
             </BackButton>
             <ContainerAddCarForm>

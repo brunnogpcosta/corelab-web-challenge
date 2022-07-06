@@ -5,14 +5,14 @@ import icoButton from '../../assets/Add.svg'
 
 const ImgButton = styled.img`
   position: absolute;
-  top: 88px;
+  top: 92px;
   left: 60px;
   color: rgba(2, 2, 2, 0.7);
   cursor: pointer;
 `
 
 const AddButton = styled.button`
-margin-top: 10px;
+    margin-top: 10px;
     background-color: rgba(101, 220, 199, 0.8);
     border: none;
     border-radius: 100px;

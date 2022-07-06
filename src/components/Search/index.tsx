@@ -1,7 +1,10 @@
 import styled from 'styled-components'
+import {useNavigate} from 'react-router-dom';
+
 
 import icoSearch from '../../assets/Search.svg'
 import icoFilter from '../../assets/filter.png'
+
 
 
 const Container = styled.div`
@@ -15,8 +18,6 @@ const SearchImg = styled.img`
     color: #020202;
     position: absolute;
     margin: 5px 0px 0px 10px;
-
-
 `
 
 const Input = styled.input`
@@ -29,6 +30,11 @@ const Input = styled.input`
   padding: 5px 0px 5px 50px;
 
 `
+const ButtonFilter = styled.button`
+  border: none;
+  background-color: #E5E5E5;
+  cursor: pointer;
+`
 
 interface ISearch {
   placeholder: string;
@@ -37,13 +43,23 @@ interface ISearch {
 }
 
 const Search = (props: ISearch) => {
+
+  const navigate = useNavigate()
+
+  const navigateToFilter = () => {
+    //navigate to /filter
+    navigate('/filter');
+  };
+
+
   return (
     <Container>
       <SearchImg src={icoSearch}></SearchImg>
       <Input type="text" placeholder={props.placeholder} value={props.value} ></Input>
 
-      <img src={icoFilter}></img>
-
+      <ButtonFilter onClick={navigateToFilter}>
+        <img src={icoFilter}></img>
+      </ButtonFilter>
     </Container>
   );
 };
