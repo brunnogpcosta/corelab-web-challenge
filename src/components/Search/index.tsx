@@ -50,7 +50,6 @@ const Search = (props: ISearch) => {
 
   const handleChangeValue = (value: string) => {
     console.log("Search String:", value)
-
     // Incluir filtro
   }
 
