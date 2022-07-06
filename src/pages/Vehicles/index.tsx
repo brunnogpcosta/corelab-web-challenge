@@ -22,7 +22,7 @@ const VehiclesPage = () => {
   return (
     <div className={styles.Vehicles}>
       <main className={styles.main}>
-        <Search placeholder="Search" value={search} onChange={() => {}} />
+        <Search placeholder="Buscar" value={search} onChange={() => {}} />
 
         <Button text="Add new vehicle" onClick={() => {}} />
 
