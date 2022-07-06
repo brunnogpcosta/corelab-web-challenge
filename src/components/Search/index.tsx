@@ -16,6 +16,7 @@ const SearchImg = styled.img`
     position: absolute;
     margin: 5px 0px 0px 10px;
 
+
 `
 
 const Input = styled.input`
