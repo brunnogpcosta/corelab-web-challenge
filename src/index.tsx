@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import FilterCarForm from './components/FilterCarForm';
 import './index.module.scss';
+import FilterCarPage from './pages/FilterCar';
 import NewCarPage from './pages/NewCar';
 import VehiclesPage from './pages/Vehicles';
 import reportWebVitals from './reportWebVitals';
@@ -10,11 +12,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <NewCarPage />
+    <FilterCarPage></FilterCarPage>
   </React.StrictMode>
 );
 
-
+//   <NewCarPage />
 //<VehiclesPage />
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
