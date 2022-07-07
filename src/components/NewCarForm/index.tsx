@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { FormEvent, useState } from 'react'
 import styled from 'styled-components'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 import icoArrow from '../../assets/Arrow.svg'
+import { api } from '../../services/api'
 
 
 const ContainerAddCarForm = styled.div`
@@ -77,12 +78,34 @@ const BackButton = styled.button`
 
 
 const NewCarForm = () => {
+const [name, setName] = useState('')
+const [brand, setBrand] = useState('')
+const [color, setColor] = useState('')
+const [year, setYear] = useState(1900)
+const [licensePlate, setLicensePlate] = useState('')
+
     const navigate = useNavigate()
 
     const navigateToHome = () => {
         //navigate to /
         navigate('/');
     };
+
+
+    const handleCreateNewCar = (event: FormEvent) => {
+        event.preventDefault();
+
+        const data ={
+            name,
+            brand,
+            color,
+            year,
+            licensePlate
+        }
+
+
+        api.post('/vehicles', data)
+    }
 
 
     return (
@@ -92,29 +115,29 @@ const NewCarForm = () => {
             </BackButton>
             <ContainerAddCarForm>
 
-                <form action="">
+                <form onSubmit={handleCreateNewCar}>
                     <label>Nome: <br />
-                        <input type="text" />
+                        <input type="text" value={name} onChange={event => setName(event.target.value)}/>
                     </label>
                     <br />
 
                     <label>Marca:<br />
-                        <input type="text" />
+                        <input type="text" value={brand} onChange={event => setBrand(event.target.value)}/>
                     </label>
                     <br />
 
                     <label>Cor:<br />
-                        <input type="text" />
+                        <input type="text" value={color} onChange={event => setColor(event.target.value)}/>
                     </label>
                     <br />
 
                     <label>Ano:<br />
-                        <input type="Number" />
+                        <input type="Number" value={year} min="1900" onChange={event => setYear(Number(event.target.value))}/>
                     </label>
                     <br />
 
                     <label>Placa:<br />
-                        <input type="text" />
+                        <input type="text" value={licensePlate} onChange={event => setLicensePlate(event.target.value)}/>
                     </label>
                     <br />
                     <ContainerSubmitButton>

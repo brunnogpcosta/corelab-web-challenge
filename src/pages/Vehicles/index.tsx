@@ -8,6 +8,7 @@ import { IVehicle } from "../../types/Vehicle";
 import styles from "./Vehicles.module.scss";
 import { api } from "../../services/api";
 
+
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>("");
@@ -25,10 +26,10 @@ const VehiclesPage = () => {
   console.log({ vehicles });
 */
 
-useEffect(()=>{
-  api.get('vehicles')
-  .then(response=>console.log(response.data))
-},[])
+  useEffect(() => {
+    api.get('vehicles')
+      .then(response => setVehicles(response.data.vehicles))
+  }, [])
 
   const navigateToAdd = () => {
     //navigate to /add
@@ -43,47 +44,18 @@ useEffect(()=>{
         <Button text="Adicionar" onClick={navigateToAdd} />
 
         <div className={styles.ContainerCardVehicles}>
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
+          {vehicles.map(vehicle => (
+            <Card key={vehicle.id} title={vehicle.name} colorCard={vehicle.color}>
+              <p>Preço: {new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(vehicle.price)}</p>
+              <p>Nome: {vehicle.name}</p>
+              <p>Marca: {vehicle.brand}</p>
+              <p>Year: {vehicle.year}</p>
+            </Card>
+          ))}
 
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
-
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
-
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
-
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
-
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
-
-          <Card title="Sandero Stepway">
-            <p>Price: 22000</p>
-            <p>Description: Carro usado por 2 anos...</p>
-            <p>Year: 2018</p>
-          </Card>
         </div>
       </main>
     </div>
