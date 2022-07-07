@@ -7,13 +7,10 @@ import icoArrow from '../../assets/Arrow.svg'
 
 const ContainerFilterCarForm = styled.div`
     width: 70%;
-    height: 80vh;
+    padding: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+
 
         label{
             margin-left: 40px;
@@ -48,30 +45,34 @@ const ContainerFilterCarForm = styled.div`
             margin-left: 20px;
             font-size: 14px;
             height: 35px;
-            width: 85%;
+            width: 95%;
          }
+
+         
         }
 `
 
 const ContainerPrice = styled.div`
-    width: 95%;
-    margin:  0 auto;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    align-content: center;
+    flex-wrap: nowrap;
+ 
 
-    label{
-      
-  
+
+    div{
+     text-align: center;
+    
+         label{
+         
+        }
+
+        input{
+     width: 50%;
+
+        }
     }
 
-    input{
-        position: relative;
-        right: 45px;
-    }
 `
 
 const ContainerSubmitButton = styled.div`
@@ -94,6 +95,16 @@ const SubmitButton = styled.button`
                 border-radius: 100px;
                 width: 100px;
                 height: 30px;
+
+                :hover{
+                    background: rgba(2, 173, 142, 0.8);
+                   transition: .2s;
+                }
+
+                :focus{
+                    background: rgba(2, 128, 104, 0.8);
+                   transition: .2s;
+                }
 `
 
 
@@ -112,8 +123,8 @@ const FilterCarForm = () => {
     const navigateToHome = () => {
         //navigate to /
         navigate('/');
-      };
-    
+    };
+
 
     return (
         <>
@@ -158,14 +169,19 @@ const FilterCarForm = () => {
                     <br />
 
                     <ContainerPrice>
-                        <label>Preço min.
-                            <input type="number" min="1" step="any" />
-                        </label>
 
-                        <label>Preço máx.
+                        <div>
+                            <label>Preço min.  </label>
                             <input type="number" min="1" step="any" />
-                        </label>
+                        </div>
+
+                        <div>
+                            <label>Preço máx.</label>
+                            <input type="number" min="1" step="any" />
+                        </div>
+
                     </ContainerPrice>
+
                     <br />
                     <ContainerSubmitButton>
                         <SubmitButton>salvar</SubmitButton>

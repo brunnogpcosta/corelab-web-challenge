@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import icoHeart from '../../assets/heart.svg'
 import icoTrash from '../../assets/trash.svg'
 import icoEdit from '../../assets/edit.svg'
+import { api } from "../../services/api";
 
 
 interface ICard {
@@ -15,6 +16,9 @@ interface ICard {
 
 const Card = (props: ICard) => {
 
+  const handleDeleteCar = (id:number) =>{
+    api.delete('/vehicles/:' + id)
+  }
 
 
   return (
@@ -23,7 +27,7 @@ const Card = (props: ICard) => {
         <h2>{props.title}</h2>
         <div className={styles.ContainerIcons}>
           <img src={icoEdit}></img>
-          <img src={icoTrash}></img>
+          <img src={icoTrash} onClick={() => handleDeleteCar(3)}></img>
           <img src={icoHeart}></img>
         </div>
       </div>

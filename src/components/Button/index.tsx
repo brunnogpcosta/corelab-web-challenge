@@ -20,6 +20,7 @@ const AddButton = styled.button`
     text-transform: uppercase;
     font-weight: bolder;
     color: rgba(2, 2, 2, 0.7);
+    margin-right: 20px;
     cursor: pointer;
 `
 

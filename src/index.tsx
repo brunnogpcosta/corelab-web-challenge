@@ -21,9 +21,9 @@ createServer({
           plate: 'xxxx-123',
           isFavorite: 'false',
           year: 2021,
-          color: 'Red',
+          color: '#eb4d4d',
           price: '20000.00',
-          createdAt: Date
+          createdAt: new Date()
         },
         {
           id: 2,
@@ -33,9 +33,9 @@ createServer({
           plate: 'xxxx-123',
           isFavorite: 'false',
           year: 2021,
-          color: 'Blue',
+          color: '#6375f8',
           price: '20000.00',
-          createdAt: Date
+          createdAt:  new Date()
         }
       ]
     })
@@ -52,10 +52,16 @@ createServer({
     this.post('/vehicles', (schema, request) => {
       const data = JSON.parse(request.requestBody)
 
-      return schema.create('transaction', data)
+      return schema.create('vehicles', data)
     })
 
+    this.delete("/vehicles/:id", (schema, request) => {
+      let id = request.params.id;
+    
+      //return schema.find('vehicles', id)
 
+      return this.schema.all('vehicles')
+    })
 
   }
 })

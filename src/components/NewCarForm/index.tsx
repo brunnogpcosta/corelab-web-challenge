@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react'
 import styled from 'styled-components'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import icoArrow from '../../assets/Arrow.svg'
 import { api } from '../../services/api'
@@ -8,13 +8,10 @@ import { api } from '../../services/api'
 
 const ContainerAddCarForm = styled.div`
     width: 70%;
-    height: 80vh;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.7);
     margin: 0 auto;
-    display: flex;
-    justify-content: center ;
-    align-items: center;
-    align-content: center;
+    padding: 40px;
 
         label{
             margin-left: 40px;
@@ -27,7 +24,6 @@ const ContainerAddCarForm = styled.div`
      
 
         input{
-       
             border-radius: 100px;
             border: 1px solid;
             padding: 5px 20px 5px 20px;
@@ -37,7 +33,8 @@ const ContainerAddCarForm = styled.div`
             margin-left: 20px;
             font-size: 14px;
             height: 20px;
-            width: 70%;
+            width: 80%;
+           
             
 
          }
@@ -64,6 +61,16 @@ const SubmitButton = styled.button`
                 border-radius: 100px;
                 width: 100px;
                 height: 30px;
+
+                :hover{
+                    background: rgba(2, 173, 142, 0.8);
+                   transition: .2s;
+                }
+
+                :focus{
+                    background: rgba(2, 128, 104, 0.8);
+                   transition: .2s;
+                }
 `
 
 
@@ -78,11 +85,16 @@ const BackButton = styled.button`
 
 
 const NewCarForm = () => {
+const [id, setId] = useState(3)
 const [name, setName] = useState('')
 const [brand, setBrand] = useState('')
+const [description, setDescription] = useState('')
 const [color, setColor] = useState('')
 const [year, setYear] = useState(1900)
+const [price, setPrice] = useState(0)
 const [licensePlate, setLicensePlate] = useState('')
+const [isFavorite, setIsFavorite] = useState(false)
+const [createdAt, setCreatedAt] = useState(new Date())
 
     const navigate = useNavigate()
 
@@ -95,16 +107,28 @@ const [licensePlate, setLicensePlate] = useState('')
     const handleCreateNewCar = (event: FormEvent) => {
         event.preventDefault();
 
-        const data ={
+            const data ={
+            id,
             name,
             brand,
-            color,
+            description,
+            licensePlate,
+            isFavorite,
             year,
-            licensePlate
+            color,
+            price,
+            createdAt
         }
 
 
-        api.post('/vehicles', data)
+        try{
+            api.post('/vehicles', data)
+
+            navigateToHome()
+        }catch(err){
+            console.log("Error: " + err)
+        }
+
     }
 
 
@@ -117,27 +141,37 @@ const [licensePlate, setLicensePlate] = useState('')
 
                 <form onSubmit={handleCreateNewCar}>
                     <label>Nome: <br />
-                        <input type="text" value={name} onChange={event => setName(event.target.value)}/>
+                        <input type="text" value={name} onChange={event => setName(event.target.value)} required/>
                     </label>
                     <br />
 
                     <label>Marca:<br />
-                        <input type="text" value={brand} onChange={event => setBrand(event.target.value)}/>
+                        <input type="text" value={brand} onChange={event => setBrand(event.target.value)} required/>
+                    </label>
+                    <br />
+
+                    <label>Descrição: <br />
+                        <input type="text" value={description} onChange={event => setDescription(event.target.value)} required/>
                     </label>
                     <br />
 
                     <label>Cor:<br />
-                        <input type="text" value={color} onChange={event => setColor(event.target.value)}/>
+                        <input type="color" value={color} onChange={event => setColor(event.target.value)} style={{height:'35px', width:'84%'}} required/>
                     </label>
                     <br />
 
                     <label>Ano:<br />
-                        <input type="Number" value={year} min="1900" onChange={event => setYear(Number(event.target.value))}/>
+                        <input type="Number" value={year} min="1900" onChange={event => setYear(Number(event.target.value))} required/>
+                    </label>
+                    <br />
+
+                    <label>Price:<br />
+                        <input type="Number" value={price} onChange={event => setPrice(Number(event.target.value))} required/>
                     </label>
                     <br />
 
                     <label>Placa:<br />
-                        <input type="text" value={licensePlate} onChange={event => setLicensePlate(event.target.value)}/>
+                        <input type="text" value={licensePlate} onChange={event => setLicensePlate(event.target.value)} required/>
                     </label>
                     <br />
                     <ContainerSubmitButton>

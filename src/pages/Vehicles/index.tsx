@@ -46,13 +46,14 @@ const VehiclesPage = () => {
         <div className={styles.ContainerCardVehicles}>
           {vehicles.map(vehicle => (
             <Card key={vehicle.id} title={vehicle.name} colorCard={vehicle.color}>
+              <p>Nome: {vehicle.name} {vehicle.brand}</p>
               <p>Preço: {new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
               }).format(vehicle.price)}</p>
-              <p>Nome: {vehicle.name}</p>
-              <p>Marca: {vehicle.brand}</p>
-              <p>Year: {vehicle.year}</p>
+              <p>Descrição: {vehicle.description}</p>
+              <p>Ano: {vehicle.year}</p>
+              <p>Cor: {vehicle.color}</p>
             </Card>
           ))}
 
