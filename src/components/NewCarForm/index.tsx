@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 import icoArrow from '../../assets/Arrow.svg'
-import { api } from '../../services/api'
+//import { api } from '../../services/api'
 
 
 const ContainerAddCarForm = styled.div`
@@ -122,7 +122,7 @@ const [createdAt, setCreatedAt] = useState(new Date())
 
 
         try{
-            api.post('/vehicles', data)
+            //api.post('/vehicles', data)
 
             navigateToHome()
         }catch(err){

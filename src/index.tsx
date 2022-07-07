@@ -4,7 +4,7 @@ import { createServer, Model } from 'miragejs'
 import App from './App';
 
 
-createServer({
+/*createServer({
   models: {
     vehicles: Model
   },
@@ -65,6 +65,7 @@ createServer({
 
   }
 })
+*/
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -6,7 +6,7 @@ import { Button, Card, Search } from "../../components";
 import { IVehicle } from "../../types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
-import { api } from "../../services/api";
+//import { api } from "../../services/api";
 
 
 const VehiclesPage = () => {
@@ -14,9 +14,11 @@ const VehiclesPage = () => {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate()
 
-  /*useEffect(() => {
+  useEffect(() => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
+
+      console.log("payload", payload)
       setVehicles(payload);
     };
 
@@ -24,13 +26,14 @@ const VehiclesPage = () => {
   }, []);
 
   console.log({ vehicles });
-*/
 
+
+  /* Mocki API
   useEffect(() => {
     api.get('vehicles')
       .then(response => setVehicles(response.data.vehicles))
   }, [])
-
+*/
   const navigateToAdd = () => {
     //navigate to /add
     navigate('/add');

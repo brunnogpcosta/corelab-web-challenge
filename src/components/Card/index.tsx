@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import icoHeart from '../../assets/heart.svg'
 import icoTrash from '../../assets/trash.svg'
 import icoEdit from '../../assets/edit.svg'
-import { api } from "../../services/api";
+//import { api } from "../../services/api";
 
 
 interface ICard {
@@ -17,7 +17,7 @@ interface ICard {
 const Card = (props: ICard) => {
 
   const handleDeleteCar = (id:number) =>{
-    api.delete('/vehicles/:' + id)
+    //api.delete('/vehicles/:' + id)
   }
 
 
