@@ -6,13 +6,14 @@ import { Button, Card, Search } from "../../components";
 import { IVehicle } from "../../types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
+import { api } from "../../services/api";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate()
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
       setVehicles(payload);
@@ -22,7 +23,12 @@ const VehiclesPage = () => {
   }, []);
 
   console.log({ vehicles });
+*/
 
+useEffect(()=>{
+  api.get('vehicles')
+  .then(response=>console.log(response.data))
+},[])
 
   const navigateToAdd = () => {
     //navigate to /add
