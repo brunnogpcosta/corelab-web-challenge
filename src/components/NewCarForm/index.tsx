@@ -2,8 +2,10 @@ import React, { FormEvent, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
+
+
 import icoArrow from '../../assets/Arrow.svg'
-//import { api } from '../../services/api'
+import { postVehicles } from '../../lib/api'
 
 
 const ContainerAddCarForm = styled.div`
@@ -82,19 +84,17 @@ const BackButton = styled.button`
     cursor: pointer;
 `
 
-
-
 const NewCarForm = () => {
-const [id, setId] = useState(3)
-const [name, setName] = useState('')
-const [brand, setBrand] = useState('')
-const [description, setDescription] = useState('')
-const [color, setColor] = useState('')
-const [year, setYear] = useState(1900)
-const [price, setPrice] = useState(0)
-const [licensePlate, setLicensePlate] = useState('')
-const [isFavorite, setIsFavorite] = useState(false)
-const [createdAt, setCreatedAt] = useState(new Date())
+    const [id, setId] = useState(3)
+    const [name, setName] = useState('')
+    const [brand, setBrand] = useState('')
+    const [description, setDescription] = useState('')
+    const [color, setColor] = useState('')
+    const [year, setYear] = useState(1900)
+    const [price, setPrice] = useState(0)
+    const [plate, setPlate] = useState('')
+    const [is_favorite, sets_favorite] = useState(false)
+    const [createdAt, setCreatedAt] = useState(new Date())
 
     const navigate = useNavigate()
 
@@ -104,31 +104,31 @@ const [createdAt, setCreatedAt] = useState(new Date())
     };
 
 
-    const handleCreateNewCar = (event: FormEvent) => {
+    const handleCreateNewCar = async (event: FormEvent) => {
         event.preventDefault();
 
-            const data ={
-            id,
+        const data = {
             name,
             brand,
             description,
-            licensePlate,
-            isFavorite,
+            plate,
+            is_favorite,
             year,
             color,
-            price,
-            createdAt
+            price
         }
+        try {
+            const vehicle = await postVehicles(data)
 
-
-        try{
-            //api.post('/vehicles', data)
+            console.log(vehicle.id)
 
             navigateToHome()
-        }catch(err){
-            console.log("Error: " + err)
         }
 
+
+        catch (err) {
+            console.log("Error: " + err)
+        }
     }
 
 
@@ -141,37 +141,37 @@ const [createdAt, setCreatedAt] = useState(new Date())
 
                 <form onSubmit={handleCreateNewCar}>
                     <label>Nome: <br />
-                        <input type="text" value={name} onChange={event => setName(event.target.value)} required/>
+                        <input type="text" value={name} onChange={event => setName(event.target.value)} required />
                     </label>
                     <br />
 
                     <label>Marca:<br />
-                        <input type="text" value={brand} onChange={event => setBrand(event.target.value)} required/>
+                        <input type="text" value={brand} onChange={event => setBrand(event.target.value)} required />
                     </label>
                     <br />
 
                     <label>Descrição: <br />
-                        <input type="text" value={description} onChange={event => setDescription(event.target.value)} required/>
+                        <input type="text" value={description} onChange={event => setDescription(event.target.value)} required />
                     </label>
                     <br />
 
                     <label>Cor:<br />
-                        <input type="color" value={color} onChange={event => setColor(event.target.value)} style={{height:'35px', width:'84%'}} required/>
+                        <input type="color" value={color} onChange={event => setColor(event.target.value)} style={{ height: '35px', width: '84%' }} required />
                     </label>
                     <br />
 
                     <label>Ano:<br />
-                        <input type="Number" value={year} min="1900" onChange={event => setYear(Number(event.target.value))} required/>
+                        <input type="Number" value={year} min="1900" onChange={event => setYear(Number(event.target.value))} required />
                     </label>
                     <br />
 
                     <label>Price:<br />
-                        <input type="Number" value={price} onChange={event => setPrice(Number(event.target.value))} required/>
+                        <input type="Number" value={price} onChange={event => setPrice(Number(event.target.value))} required />
                     </label>
                     <br />
 
                     <label>Placa:<br />
-                        <input type="text" value={licensePlate} onChange={event => setLicensePlate(event.target.value)} required/>
+                        <input type="text" value={plate} onChange={event => setPlate(event.target.value)} required />
                     </label>
                     <br />
                     <ContainerSubmitButton>

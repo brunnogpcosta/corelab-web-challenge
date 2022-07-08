@@ -6,7 +6,7 @@ import { Button, Card, Search } from "../../components";
 import { IVehicle } from "../../types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
-//import { api } from "../../services/api";
+
 
 
 const VehiclesPage = () => {
@@ -25,15 +25,7 @@ const VehiclesPage = () => {
     fetchVehicles();
   }, []);
 
-  console.log({ vehicles });
 
-
-  /* Mocki API
-  useEffect(() => {
-    api.get('vehicles')
-      .then(response => setVehicles(response.data.vehicles))
-  }, [])
-*/
   const navigateToAdd = () => {
     //navigate to /add
     navigate('/add');
