@@ -11,6 +11,7 @@ import styles from "./Vehicles.module.scss";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [changed, setChanged] = useState(false);
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate()
 
@@ -18,7 +19,7 @@ const VehiclesPage = () => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
 
-      console.log("payload", payload)
+      //console.log("payload", payload)
       setVehicles(payload);
     };
 
@@ -40,7 +41,7 @@ const VehiclesPage = () => {
 
         <div className={styles.ContainerCardVehicles}>
           {vehicles.map(vehicle => (
-            <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} colorCard={vehicle.color}>
+            <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color}>
               <p>Nome: {vehicle.name} {vehicle.brand}</p>
               <p>Preço: {new Intl.NumberFormat('pt-BR', {
                 style: 'currency',

@@ -3,15 +3,18 @@ import styles from "./Card.module.scss";
 import styled from 'styled-components'
 
 import icoHeart from '../../assets/heart.svg'
+import icoFavoriteHeart from '../../assets/heartFav.svg'
 import icoTrash from '../../assets/trash.svg'
 import icoEdit from '../../assets/edit.svg'
-import { deleteVehicles } from "../../lib/api";
+
+import { deleteVehicles, favoriteVehicles } from "../../lib/api";
 
 
 interface ICard {
   title: string;
   children: ReactNode;
   colorCard: string;
+  is_favorite: boolean;
   id: number
 }
 
@@ -26,6 +29,17 @@ const Card = (props: ICard) => {
     }
   }
 
+  const handleSetFavorite = async (id: number) => {
+    try {
+      const vehicle = await favoriteVehicles(id, !props.is_favorite)
+
+      //console.log("chamou", vehicle)
+    }
+    catch (err) {
+      console.log("Error: " + err)
+    }
+  }
+
   return (
     <div className={styles.Card} style={{ backgroundColor: props.colorCard }}>
       <div className={styles.ContainerCard}>
@@ -33,7 +47,14 @@ const Card = (props: ICard) => {
         <div className={styles.ContainerIcons}>
           <img src={icoEdit}></img>
           <img src={icoTrash} onClick={() => handleDeleteCar(props.id)}></img>
-          <img src={icoHeart}></img>
+          {props.is_favorite == false ?
+
+            <img src={icoHeart} onClick={() => handleSetFavorite(props.id)}></img>
+            :
+            <img src={icoFavoriteHeart} style={{filter: "invert(57%) sepia(38%) saturate(5896%) hue-rotate(329deg) brightness(86%) contrast(126%)", width:'28px', height:'28px'}} onClick={() => handleSetFavorite(props.id)}></img>
+
+          }
+
         </div>
       </div>
 
