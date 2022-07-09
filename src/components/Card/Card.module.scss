@@ -23,12 +23,16 @@
   h2 {
     margin: 0 1rem 1rem 0;
     font-size: 1.2rem;
+    text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
+    1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
   }
 
   p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
+    text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
+      1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
   }
 
   .ContainerCard {
@@ -43,18 +47,18 @@
         width: 24px;
         margin-right: 5px;
         margin-bottom: 10px;
-       
+        filter: invert(77%) sepia(96%) saturate(231%) hue-rotate(104deg) brightness(88%) contrast(96%);
 
         cursor: pointer;
 
         &:hover,
         &:focus,
         &:active {
-          filter: invert(77%) sepia(96%) saturate(231%) hue-rotate(104deg) brightness(88%) contrast(96%);
+          filter: invert(45%) sepia(76%) saturate(441%) hue-rotate(104deg) brightness(88%) contrast(96%);
 
           &:last-child {
             filter: invert(57%) sepia(38%) saturate(5896%) hue-rotate(329deg) brightness(86%) contrast(126%);
-          
+
           }
 
           &:nth-child(2) {

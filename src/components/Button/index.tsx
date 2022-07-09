@@ -22,6 +22,17 @@ const AddButton = styled.button`
     color: rgba(2, 2, 2, 0.7);
     margin-right: 20px;
     cursor: pointer;
+
+                &:hover{
+                    background: rgba(2, 173, 142, 0.8);
+                   transition: .2s;
+                }
+
+                &:focus{
+                    background: rgba(2, 128, 104, 0.8);
+                   transition: .2s;
+                }
+
 `
 
 interface IButton {
@@ -30,15 +41,15 @@ interface IButton {
 }
 
 const Button = (props: IButton) => {
-  return(
+  return (
     <>
-    <ImgButton src={icoButton}></ImgButton>
-     <AddButton onClick={props.onClick}>{props.text}</AddButton>
+      <ImgButton src={icoButton}></ImgButton>
+      <AddButton onClick={props.onClick}>{props.text}</AddButton>
     </>
-  ) 
-  
-  
- 
+  )
+
+
+
 };
 
 export default Button;

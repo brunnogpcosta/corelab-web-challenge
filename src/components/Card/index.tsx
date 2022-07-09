@@ -44,7 +44,7 @@ const Card = (props: ICard) => {
   }
 
   return (
-    <div className={styles.Card} style={{ backgroundColor: props.colorCard }}>
+    <div className={styles.Card} style={{ backgroundColor: props.colorCard  }}>
       <div className={styles.ContainerCard}>
         <h2>{props.title}</h2>
         <div className={styles.ContainerIcons}>
