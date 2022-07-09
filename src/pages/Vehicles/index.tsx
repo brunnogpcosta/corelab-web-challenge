@@ -11,7 +11,7 @@ const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [changed, setChanged] = useState(false);
   const [search, setSearch] = useState<string>("");
-  const [favorite, setFavorite] = useState<string>("");
+  const [favorite, setFavorite] = useState<IVehicle[]>([]);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,6 +27,19 @@ const VehiclesPage = () => {
   }, [changed]);
 
 
+  useEffect(() => {
+    const fetchFavoritedVehicles = async () => {
+      const favorited = await vehicles.filter(vehicle => vehicle.is_favorite == true)
+  //    console.log("payload", favorited)
+      setFavorite(favorited)
+
+    };
+
+    fetchFavoritedVehicles();
+
+  }, [changed]);
+
+
   const navigateToAdd = () => {
     //navigate to /add
     navigate('/add');
@@ -34,7 +47,7 @@ const VehiclesPage = () => {
 
   const hasChanged = () => {
     setChanged(true);
-    console.log("true")
+  
   }
 
   const handleChangeValue = async (value: string) => {
@@ -44,7 +57,7 @@ const VehiclesPage = () => {
       setChanged(true)
     } else {
       const payload = await filterVehicles(value);
-      console.log("teste: ", payload.values)
+      //console.log("teste: ", payload.values)
       setVehicles(payload);
     }
 
@@ -62,7 +75,7 @@ const VehiclesPage = () => {
           <div className={styles.favorites}>
             <h3>Favoritos</h3>
 
-            {vehicles.map(vehicle => 
+            {favorite.map(vehicle => 
             
             (
                <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
