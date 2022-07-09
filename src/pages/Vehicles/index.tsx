@@ -32,7 +32,7 @@ const VehiclesPage = () => {
     navigate('/add');
   };
 
-  const hasChanged = ()=>{
+  const hasChanged = () => {
     setChanged(true);
     console.log("true")
   }
@@ -42,12 +42,12 @@ const VehiclesPage = () => {
 
     if (value === "") {
       setChanged(true)
-    }else{
+    } else {
       const payload = await filterVehicles(value);
       console.log("teste: ", payload.values)
       setVehicles(payload);
     }
-  
+
   }
 
   return (
@@ -58,19 +58,48 @@ const VehiclesPage = () => {
         <Button text="Adicionar" onClick={navigateToAdd} />
 
         <div className={styles.ContainerCardVehicles}>
-          {vehicles.map(vehicle => (
-            <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
-              <p>Marca: {vehicle.brand}</p>
-              <p>Preço: {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-              }).format(vehicle.price)}</p>
-              <p>Descrição: {vehicle.description}</p>
-              <p>Ano: {vehicle.year}</p>
-              <p>Cor: {vehicle.color}</p>
 
-            </Card>
-          ))}
+          <div className={styles.favorites}>
+            <h3>Favoritos</h3>
+
+            {vehicles.map(vehicle => 
+            
+            (
+               <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
+                <p>Marca: {vehicle.brand}</p>
+                <p>Preço: {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                }).format(vehicle.price)}</p>
+                <p>Descrição: {vehicle.description}</p>
+                <p>Ano: {vehicle.year}</p>
+                <p>Cor: {vehicle.color}</p>
+
+              </Card>
+            )
+            
+            )}
+
+
+          </div>
+
+          <div className={styles.allItens}>
+          <h3>Todos os items</h3>
+            {vehicles.map(vehicle => (
+              <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
+                <p>Marca: {vehicle.brand}</p>
+                <p>Preço: {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                }).format(vehicle.price)}</p>
+                <p>Descrição: {vehicle.description}</p>
+                <p>Ano: {vehicle.year}</p>
+                <p>Cor: {vehicle.color}</p>
+
+              </Card>
+            ))}
+
+          </div>
 
         </div>
       </main>
