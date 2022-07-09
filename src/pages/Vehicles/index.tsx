@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import { getVehicles } from "../../lib/api";
+import { filterVehicles, getVehicles } from "../../lib/api";
 import { Button, Card, Search } from "../../components";
 import { IVehicle } from "../../types/Vehicle";
 
@@ -16,12 +16,13 @@ const VehiclesPage = () => {
   useEffect(() => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
-
       console.log("payload", payload)
       setVehicles(payload);
+      setChanged(true)
     };
 
     fetchVehicles();
+
   }, [changed]);
 
 
@@ -30,10 +31,17 @@ const VehiclesPage = () => {
     navigate('/add');
   };
 
-  const handleChangeValue = (value: string) => {
+  const handleChangeValue = async (value: string) => {
     setSearch(value)
 
-    console.log("Meu valor: ", value)
+    if (value === "") {
+      setChanged(true)
+    }else{
+      const payload = await filterVehicles(value);
+      console.log("teste: ", payload.values)
+      setVehicles(payload);
+    }
+  
   }
 
   return (
@@ -54,7 +62,7 @@ const VehiclesPage = () => {
               <p>Descrição: {vehicle.description}</p>
               <p>Ano: {vehicle.year}</p>
               <p>Cor: {vehicle.color}</p>
-              
+
             </Card>
           ))}
 
