@@ -7,8 +7,6 @@ import { IVehicle } from "../../types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
 
-
-
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [changed, setChanged] = useState(false);
@@ -19,12 +17,12 @@ const VehiclesPage = () => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
 
-      //console.log("payload", payload)
+      console.log("payload", payload)
       setVehicles(payload);
     };
 
     fetchVehicles();
-  }, []);
+  }, [changed]);
 
 
   const navigateToAdd = () => {
@@ -32,10 +30,16 @@ const VehiclesPage = () => {
     navigate('/add');
   };
 
+  const handleChangeValue = (value: string) => {
+    setSearch(value)
+
+    console.log("Meu valor: ", value)
+  }
+
   return (
     <div className={styles.Vehicles}>
       <main className={styles.main}>
-        <Search placeholder="Buscar" value={search} onChange={() => { }} />
+        <Search placeholder="Buscar" value={search} handleChangeValue={event => handleChangeValue(event)} />
 
         <Button text="Adicionar" onClick={navigateToAdd} />
 
@@ -50,6 +54,7 @@ const VehiclesPage = () => {
               <p>Descrição: {vehicle.description}</p>
               <p>Ano: {vehicle.year}</p>
               <p>Cor: {vehicle.color}</p>
+              
             </Card>
           ))}
 

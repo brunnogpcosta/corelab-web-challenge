@@ -25,6 +25,7 @@ const Input = styled.input`
   width: 100%;
   height: 30px;
   padding: 5px 0px 5px 50px;
+  margin-right: 5px;
 
 `
 const ButtonFilter = styled.button`
@@ -36,7 +37,7 @@ const ButtonFilter = styled.button`
 interface ISearch {
   placeholder: string;
   value: string;
-  onChange: () => void;
+  handleChangeValue: (event:string) => void;
 }
 
 const Search = (props: ISearch) => {
@@ -48,15 +49,10 @@ const Search = (props: ISearch) => {
   };
 
 
-  const handleChangeValue = (value: string) => {
-    console.log("Search String:", value)
-    // Incluir filtro
-  }
-
   return (
     <Container>
       <SearchImg src={icoSearch}></SearchImg>
-      <Input type="text" placeholder={props.placeholder} onChange={event => handleChangeValue(event.target.value)}></Input>
+      <Input type="text" placeholder={props.placeholder} onChange={event => props.handleChangeValue(event.target.value)}></Input>
 
       <ButtonFilter onClick={navigateToFilter}>
         <img src={icoFilter}></img>
