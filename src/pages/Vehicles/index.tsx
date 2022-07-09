@@ -11,14 +11,15 @@ const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [changed, setChanged] = useState(false);
   const [search, setSearch] = useState<string>("");
+  const [favorite, setFavorite] = useState<string>("");
   const navigate = useNavigate()
 
   useEffect(() => {
     const fetchVehicles = async () => {
       const payload = await getVehicles();
-      console.log("payload", payload)
+      //console.log("payload", payload)
       setVehicles(payload);
-      setChanged(true)
+      setChanged(false)
     };
 
     fetchVehicles();
@@ -30,6 +31,11 @@ const VehiclesPage = () => {
     //navigate to /add
     navigate('/add');
   };
+
+  const hasChanged = ()=>{
+    setChanged(true);
+    console.log("true")
+  }
 
   const handleChangeValue = async (value: string) => {
     setSearch(value)
@@ -53,7 +59,7 @@ const VehiclesPage = () => {
 
         <div className={styles.ContainerCardVehicles}>
           {vehicles.map(vehicle => (
-            <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color}>
+            <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
               <p>Nome: {vehicle.name} {vehicle.brand}</p>
               <p>Preço: {new Intl.NumberFormat('pt-BR', {
                 style: 'currency',

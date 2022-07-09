@@ -16,6 +16,7 @@ interface ICard {
   colorCard: string;
   is_favorite: boolean;
   id: number
+  hasChanged: () => void;
 }
 
 const Card = (props: ICard) => {
@@ -23,16 +24,18 @@ const Card = (props: ICard) => {
   const handleDeleteCar = async (id: number) => {
     try {
       const vehicle = await deleteVehicles(id)
+      props.hasChanged()
     }
     catch (err) {
       console.log("Error: " + err)
     }
   }
 
+
   const handleSetFavorite = async (id: number) => {
     try {
       const vehicle = await favoriteVehicles(id, !props.is_favorite)
-
+      props.hasChanged()
       //console.log("chamou", vehicle)
     }
     catch (err) {
@@ -49,9 +52,9 @@ const Card = (props: ICard) => {
           <img src={icoTrash} onClick={() => handleDeleteCar(props.id)}></img>
           {props.is_favorite == false ?
 
-            <img src={icoHeart} onClick={() => handleSetFavorite(props.id)}></img>
+            <img src={icoHeart} onClick={() => {handleSetFavorite(props.id)}}></img>
             :
-            <img src={icoFavoriteHeart} style={{filter: "invert(57%) sepia(38%) saturate(5896%) hue-rotate(329deg) brightness(86%) contrast(126%)", width:'28px', height:'28px'}} onClick={() => handleSetFavorite(props.id)}></img>
+            <img src={icoFavoriteHeart} style={{filter: "invert(57%) sepia(38%) saturate(5896%) hue-rotate(329deg) brightness(86%) contrast(126%)", width:'24px', height:'24px' }} onClick={() => handleSetFavorite(props.id)}></img>
 
           }
 

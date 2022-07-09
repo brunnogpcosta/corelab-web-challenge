@@ -43,6 +43,7 @@
         width: 24px;
         margin-right: 5px;
         margin-bottom: 10px;
+       
 
         cursor: pointer;
 
@@ -53,6 +54,7 @@
 
           &:last-child {
             filter: invert(57%) sepia(38%) saturate(5896%) hue-rotate(329deg) brightness(86%) contrast(126%);
+          
           }
 
           &:nth-child(2) {
