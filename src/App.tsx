@@ -8,6 +8,7 @@ import VehiclesPage from './pages/Vehicles';
 
 
 import './index.module.scss';
+import { EditCarForm } from "./components";
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/" element={<VehiclesPage />} />
                 <Route path="/filter" element={<FilterCarPage />} />
                 <Route path="/add" element={<NewCarPage />} />
+                <Route path="/edit/:id" element={<EditCarForm/>} />
             </Routes>
         </BrowserRouter>
     </>

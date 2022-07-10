@@ -19,6 +19,20 @@ const post = async (path: string, body: ICreateVehicleDto): Promise<any> => {
     headers: myHeaders,
     body: JSON.stringify(body)
   }).then((res) => res.json());
+  
+};
+
+const patch = async (path: string, body: ICreateVehicleDto): Promise<any> => {
+
+  const myHeaders = new Headers({
+    "Content-Type": "application/json"
+  });
+  return fetch(endpoint(path), {
+    method: "PATCH",
+    headers: myHeaders,
+    body: JSON.stringify(body)
+  }).then((res) => res.json());
+  
 };
 
 const toDelete = async (path: string, id: number): Promise<any> => {
@@ -46,7 +60,7 @@ export const getVehicles = async (): Promise<IVehicle[]> => {
   return get("/api/vehicles");
 };
 
-export const filterVehicles = async (params:string): Promise<IVehicle[]> => {
+export const filterVehicles = async (params: string): Promise<IVehicle[]> => {
   return get("/api/vehicles/filter/" + params);
 };
 
@@ -54,9 +68,18 @@ export const postVehicles = async (body: ICreateVehicleDto): Promise<IVehicle> =
   return post("/api/vehicles", body);
 };
 
+export const updateVehicles = async (body: ICreateVehicleDto, id: number): Promise<IVehicle> => {
+  return patch("/api/vehicles/" + id, body);
+};
+
 export const deleteVehicles = async (id: number): Promise<number> => {
   //console.log("/api/vehicles/"+id)
   return toDelete("/api/vehicles/", id);
+};
+
+export const getVehiclesById = async (id: number): Promise<IVehicle> => {
+  //console.log("/api/vehicles/"+id)
+  return get("/api/vehicles/" + id);
 };
 
 export const favoriteVehicles = async (id: number, is_favorite: boolean): Promise<number> => {
