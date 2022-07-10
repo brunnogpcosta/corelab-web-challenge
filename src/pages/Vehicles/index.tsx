@@ -29,8 +29,9 @@ const VehiclesPage = () => {
 
   useEffect(() => {
     const fetchFavoritedVehicles = async () => {
-      const favorited = await vehicles.filter(vehicle => vehicle.is_favorite == true)
-  //    console.log("payload", favorited)
+      const vehicles = await getVehicles();
+      const favorited= vehicles.filter(vehicle => vehicle.is_favorite == true)
+      //console.log("payload", favorited)
       setFavorite(favorited)
 
     };
