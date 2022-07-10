@@ -93,7 +93,7 @@ const EditCarForm = () => {
     const [year, setYear] = useState(1900)
     const [price, setPrice] = useState(0)
     const [plate, setPlate] = useState('')
-    const [is_favorite, sets_favorite] = useState(false)
+    const [is_favorite, setIsFavorite] = useState(false)
     const [createdAt, setCreatedAt] = useState(new Date())
 
     const navigate = useNavigate()
@@ -113,6 +113,7 @@ const EditCarForm = () => {
           setColor(data.color)
           setPrice(data.price)
           setPlate(data.plate)
+          setIsFavorite(data.is_favorite)
           setDescription(data.description)
           setYear(data.year)
 
