@@ -30,7 +30,7 @@ const VehiclesPage = () => {
   useEffect(() => {
     const fetchFavoritedVehicles = async () => {
       const vehicles = await getVehicles();
-      const favorited= vehicles.filter(vehicle => vehicle.is_favorite == true)
+      const favorited = vehicles.filter(vehicle => vehicle.is_favorite == true)
       //console.log("payload", favorited)
       setFavorite(favorited)
 
@@ -48,7 +48,7 @@ const VehiclesPage = () => {
 
   const hasChanged = () => {
     setChanged(true);
-  
+
   }
 
   const handleChangeValue = async (value: string) => {
@@ -74,31 +74,31 @@ const VehiclesPage = () => {
         <div className={styles.ContainerCardVehicles}>
 
           <div className={styles.favorites}>
-            <h3>Favoritos</h3>
+            <h3>Favoritos ({favorite.length})</h3>
+            {favorite.length <= 0 ? <p>Sem carros favoritados.</p> :
+              favorite.map(vehicle =>
 
-            {favorite.map(vehicle => 
-            
-            (
-               <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
-                <p>Marca: {vehicle.brand}</p>
-                <p>Preço: {new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                }).format(vehicle.price)}</p>
-                <p>Descrição: {vehicle.description}</p>
-                <p>Ano: {vehicle.year}</p>
-                <p>Cor: {vehicle.color}</p>
+              (
+                <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
+                  <p>Marca: {vehicle.brand}</p>
+                  <p>Preço: {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(vehicle.price)}</p>
+                  <p>Descrição: {vehicle.description}</p>
+                  <p>Ano: {vehicle.year}</p>
+                  <p>Cor: {vehicle.color}</p>
 
-              </Card>
-            )
-            
-            )}
+                </Card>
+              )
+
+              )}
 
 
           </div>
 
           <div className={styles.allItens}>
-          <h3>Todos os items</h3>
+            <h3>Todos os items ({vehicles.length})</h3>
             {vehicles.map(vehicle => (
               <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
                 <p>Marca: {vehicle.brand}</p>

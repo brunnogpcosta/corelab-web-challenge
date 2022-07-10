@@ -43,7 +43,7 @@ interface IButton {
 const Button = (props: IButton) => {
   return (
     <>
-      <ImgButton src={icoButton}></ImgButton>
+      <ImgButton src={icoButton} onClick={props.onClick}></ImgButton>
       <AddButton onClick={props.onClick}>{props.text}</AddButton>
     </>
   )
