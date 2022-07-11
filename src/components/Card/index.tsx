@@ -25,7 +25,7 @@ interface ICard {
 const Card = (props: ICard) => {
 
   const navigate = useNavigate()
-  
+
   const handleDeleteCar = async (id: number) => {
     try {
       const vehicle = await deleteVehicles(id)
@@ -58,7 +58,9 @@ const Card = (props: ICard) => {
     <div className={styles.Card} style={{ backgroundColor: props.colorCard }}>
       <div className={styles.ContainerCard}>
         <h2>{props.title}</h2>
+
         <div className={styles.ContainerIcons}>
+
           <img src={icoEdit} onClick={() => navigateToEdit(props.id)}></img>
           <img src={icoTrash} onClick={() => handleDeleteCar(props.id)}></img>
           {props.is_favorite == false ?
@@ -72,7 +74,9 @@ const Card = (props: ICard) => {
         </div>
       </div>
 
-      <div className={styles.content}>{props.children}</div>
+      <div className={styles.corCard}>
+        <div className={styles.content}>{props.children}</div>
+      </div>
     </div>
   );
 };

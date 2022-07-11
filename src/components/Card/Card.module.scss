@@ -1,5 +1,5 @@
 .Card {
-  padding: 2rem;
+  padding: 1rem .3rem 2.5rem 0.3rem;
   text-align: left;
   color: rgb(31, 31, 31);
   text-decoration: none;
@@ -11,6 +11,14 @@
   width: 260px;
   height: 180px;
 
+  .corCard {
+    background-color: rgb(252, 252, 252);
+    width: 100%;
+    border-radius: 0px;
+    padding: 5px;
+    margin-left: -5px;
+
+  }
 
   &:hover,
   &:focus,
@@ -22,23 +30,28 @@
 
   h2 {
     margin: 0 1rem 1rem 0;
+    padding: 0px 10px;
     font-size: 1.2rem;
     text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
-    1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+      1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
   }
 
   p {
     margin: 0;
+    padding: 0px 10px;
     font-size: 1rem;
     line-height: 1.5;
-    text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
-      1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
   }
+
+
 
   .ContainerCard {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+
+
 
     .ContainerIcons {
       margin-left: 10px;
