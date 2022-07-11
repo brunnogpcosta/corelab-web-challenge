@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import icoSearch from '../../assets/Search.svg'
 import icoFilter from '../../assets/filter.png'
+import { IVehicle } from '../../types/Vehicle';
 
 const Container = styled.div`
   display: flex;

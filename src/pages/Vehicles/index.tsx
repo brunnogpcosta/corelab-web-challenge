@@ -10,6 +10,7 @@ import styles from "./Vehicles.module.scss";
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [changed, setChanged] = useState(false);
+  const [temFiltro, settemFiltro] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [favorite, setFavorite] = useState<IVehicle[]>([]);
   const navigate = useNavigate()
@@ -56,10 +57,12 @@ const VehiclesPage = () => {
 
     if (value === "") {
       setChanged(true)
+      settemFiltro(false)
     } else {
       const payload = await filterVehicles(value);
       //console.log("teste: ", payload.values)
       setVehicles(payload);
+      settemFiltro(true)
     }
 
   }
@@ -88,7 +91,6 @@ const VehiclesPage = () => {
                   <p>Descrição: {vehicle.description}</p>
                   <p>Ano: {vehicle.year}</p>
                   <p>Cor: {vehicle.color}</p>
-
                 </Card>
               )
 
@@ -98,20 +100,23 @@ const VehiclesPage = () => {
           </div>
 
           <div className={styles.allItens}>
-            <h3>Todos os items ({vehicles.length})</h3>
-            {vehicles.map(vehicle => (
-              <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
-                <p>Marca: {vehicle.brand}</p>
-                <p>Preço: {new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                }).format(vehicle.price)}</p>
-                <p>Descrição: {vehicle.description}</p>
-                <p>Ano: {vehicle.year}</p>
-                <p>Cor: {vehicle.color}</p>
+            <h3>Veículos filtrados ({vehicles.length}) {temFiltro == true ? `para o termo "${search}"` : ""}</h3>
 
-              </Card>
-            ))}
+            {vehicles.length <= 0 ? <p>Sem carros para o filtro informado.</p> :
+
+              vehicles.map(vehicle => (
+                <Card key={vehicle.id} title={vehicle.name} id={vehicle.id} is_favorite={vehicle.is_favorite} colorCard={vehicle.color} hasChanged={() => hasChanged()}>
+                  <p>Marca: {vehicle.brand}</p>
+                  <p>Preço: {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(vehicle.price)}</p>
+                  <p>Descrição: {vehicle.description}</p>
+                  <p>Ano: {vehicle.year}</p>
+                  <p>Cor: {vehicle.color}</p>
+
+                </Card>
+              ))}
 
           </div>
 

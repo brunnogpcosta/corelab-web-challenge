@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
 
 import icoArrow from '../../assets/Arrow.svg'
+import { IVehicle } from "../../types/Vehicle";
+import { getVehicles } from "../../lib/api";
 
 
 const ContainerFilterCarForm = styled.div`
@@ -118,6 +120,19 @@ const BackButton = styled.button`
 
 const FilterCarForm = () => {
     const navigate = useNavigate()
+    const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+ 
+    useEffect(() => {
+        const fetchVehicles = async () => {
+            const payload = await getVehicles();
+            //console.log("payload filter: ", payload)
+            setVehicles(payload);
+        };
+
+        fetchVehicles();
+
+    }, []);
+
 
 
     const navigateToHome = () => {
@@ -137,10 +152,11 @@ const FilterCarForm = () => {
                     <label>Marca: <br />
                         <select id="marca" name="marca">
                             <option value="empty"></option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            {
+                                vehicles.map(vehicle => (
+                                    <option key={vehicle.id} value={vehicle.brand}>{vehicle.brand.toLowerCase()}</option>
+                                ))}
+
                         </select>
                     </label>
                     <br />
@@ -148,10 +164,9 @@ const FilterCarForm = () => {
                     <label>Cor:<br />
                         <select id="cor" name="cor">
                             <option value="empty"></option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            {vehicles.map(vehicle => (
+                                <option key={vehicle.id} value={vehicle.color}>{vehicle.color.toLowerCase()}</option>
+                            ))}
                         </select>
                     </label>
                     <br />
@@ -160,10 +175,9 @@ const FilterCarForm = () => {
                     <label>Ano:<br />
                         <select id="ano" name="ano">
                             <option value="empty"></option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            {vehicles.map(vehicle => (
+                                <option key={vehicle.id} value={vehicle.year}>{vehicle.year}</option>
+                            ))}
                         </select>
                     </label>
                     <br />
