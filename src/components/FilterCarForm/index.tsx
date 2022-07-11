@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import styled from 'styled-components'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import icoArrow from '../../assets/Arrow.svg'
 import { IVehicle } from "../../types/Vehicle";
-import { getVehicles } from "../../lib/api";
+import { filterVehiclesByParams, getVehicles } from "../../lib/api";
 
 
 const ContainerFilterCarForm = styled.div`
@@ -121,7 +121,12 @@ const BackButton = styled.button`
 const FilterCarForm = () => {
     const navigate = useNavigate()
     const [vehicles, setVehicles] = useState<IVehicle[]>([]);
- 
+    const [brand, setBrand] = useState("")
+    const [color, setColor] = useState("")
+    const [year, setYear] = useState(0);
+    const [minPrice, setMinPrice] = useState(0)
+    const [maxPrice, setMaxPrice] = useState(0)
+
     useEffect(() => {
         const fetchVehicles = async () => {
             const payload = await getVehicles();
@@ -134,6 +139,24 @@ const FilterCarForm = () => {
     }, []);
 
 
+    const handleFilterCar = async (event: FormEvent) => {
+        event.preventDefault();
+
+        const data = {
+            brand,
+            year,
+            color,
+            minPrice,
+            maxPrice
+        }
+        try {
+            const vehicle = await filterVehiclesByParams(brand, color, year, minPrice, maxPrice);
+        }
+        catch (err) {
+            console.log("Error: " + err)
+        }
+    }
+
 
     const navigateToHome = () => {
         //navigate to /
@@ -143,14 +166,15 @@ const FilterCarForm = () => {
 
     return (
         <>
+
             <BackButton onClick={navigateToHome}>
                 <img src={icoArrow}></img>
             </BackButton>
 
             <ContainerFilterCarForm>
-                <form action="">
+                <form onSubmit={handleFilterCar}>
                     <label>Marca: <br />
-                        <select id="marca" name="marca">
+                        <select id="marca" name="marca" onChange={event => setBrand(event.target.value)}>
                             <option value="empty"></option>
                             {
                                 vehicles.map(vehicle => (
@@ -162,7 +186,7 @@ const FilterCarForm = () => {
                     <br />
 
                     <label>Cor:<br />
-                        <select id="cor" name="cor">
+                        <select id="cor" name="cor" onChange={event => setColor(event.target.value)}>
                             <option value="empty"></option>
                             {vehicles.map(vehicle => (
                                 <option key={vehicle.id} value={vehicle.color}>{vehicle.color.toLowerCase()}</option>
@@ -173,7 +197,7 @@ const FilterCarForm = () => {
 
 
                     <label>Ano:<br />
-                        <select id="ano" name="ano">
+                        <select id="ano" name="ano" onChange={event => setYear(Number(event.target.value))}>
                             <option value="empty"></option>
                             {vehicles.map(vehicle => (
                                 <option key={vehicle.id} value={vehicle.year}>{vehicle.year}</option>
@@ -186,21 +210,26 @@ const FilterCarForm = () => {
 
                         <div>
                             <label>Preço min.  </label>
-                            <input type="number" min="1" step="any" />
+                            <input type="number" min="1" step="any" onChange={event => setMinPrice(Number(event.target.value))} />
                         </div>
 
                         <div>
                             <label>Preço máx.</label>
-                            <input type="number" min="1" step="any" />
+                            <input type="number" min="1" step="any" onChange={event => setMaxPrice(Number(event.target.value))} />
                         </div>
 
                     </ContainerPrice>
 
                     <br />
-                    <ContainerSubmitButton>
-                        <SubmitButton>salvar</SubmitButton>
-                    </ContainerSubmitButton>
 
+                    <Link to={{
+                        pathname: "/",
+                        search: `filter?q=${brand}/${color}/${year}/${minPrice}/${maxPrice}`
+                    }}>
+                        <ContainerSubmitButton>
+                            <SubmitButton>salvar</SubmitButton>
+                        </ContainerSubmitButton>
+                    </Link>
                 </form>
             </ContainerFilterCarForm>
         </>

@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 
+import Modal from 'react-modal'
+
 import icoSearch from '../../assets/Search.svg'
 import icoFilter from '../../assets/filter.png'
-import { IVehicle } from '../../types/Vehicle';
+
+import { useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -38,11 +41,23 @@ const ButtonFilter = styled.button`
 interface ISearch {
   placeholder: string;
   value: string;
-  handleChangeValue: (event:string) => void;
+  handleChangeValue: (event: string) => void;
 }
 
 const Search = (props: ISearch) => {
   const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+
+  function handleOpenModal() {
+    setIsModalOpen(true)
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false)
+  }
+
+
 
   const navigateToFilter = () => {
     //navigate to /filter
@@ -58,6 +73,10 @@ const Search = (props: ISearch) => {
       <ButtonFilter onClick={navigateToFilter}>
         <img src={icoFilter}></img>
       </ButtonFilter>
+
+      <Modal isOpen={isModalOpen}>
+        <label>Marca:</label>
+      </Modal>
     </Container>
   );
 };

@@ -11,17 +11,19 @@ import './index.module.scss';
 import { EditCarForm } from "./components";
 
 
+
 const App = () => {
-    return (<>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<VehiclesPage />} />
-                <Route path="/filter" element={<FilterCarPage />} />
-                <Route path="/add" element={<NewCarPage />} />
-                <Route path="/edit/:id" element={<EditCarForm/>} />
-            </Routes>
-        </BrowserRouter>
-    </>
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<VehiclesPage />} />
+                    <Route path="/filter" element={<FilterCarPage />} />
+                    <Route path="/add" element={<NewCarPage />} />
+                    <Route path="/edit/:id" element={<EditCarForm />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     )
 }
 

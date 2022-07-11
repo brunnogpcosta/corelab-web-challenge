@@ -64,6 +64,14 @@ export const filterVehicles = async (params: string): Promise<IVehicle[]> => {
   return get("/api/vehicles/filter/" + params);
 };
 
+  export const filterVehiclesByParams = async (brand: string, color:string, year:number, minPrice:number, maxPrice:number ): Promise<IVehicle[]> => {
+  const makeUrl = "/api/vehicles/filter/" + brand+"/"+color+"/"+year+"/"+minPrice+"/"+maxPrice+"/*"
+
+  console.log(makeUrl)
+    return get(makeUrl);
+};
+
+
 export const postVehicles = async (body: ICreateVehicleDto): Promise<IVehicle> => {
   return post("/api/vehicles", body);
 };

@@ -1,31 +1,60 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import { filterVehicles, getVehicles } from "../../lib/api";
+import { filterVehicles, filterVehiclesByParams, getVehicles } from "../../lib/api";
 import { Button, Card, Search } from "../../components";
 import { IVehicle } from "../../types/Vehicle";
 
 import styles from "./Vehicles.module.scss";
 
+
+
 const VehiclesPage = () => {
+
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [changed, setChanged] = useState(false);
   const [temFiltro, settemFiltro] = useState(false);
+  const [temfiltroForm, setTemFiltroForm] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [favorite, setFavorite] = useState<IVehicle[]>([]);
   const navigate = useNavigate()
 
+
   useEffect(() => {
     const fetchVehicles = async () => {
-      const payload = await getVehicles();
-      //console.log("payload", payload)
-      setVehicles(payload);
+
+      if (window.location.href.includes("filter") == true) {
+        const pre = window.location.href.slice(32, window.location.href.length)
+        var arrayList = pre.split("/");
+
+        const brand = arrayList[0]
+        const color = arrayList[1]
+        const year = Number(arrayList[2])
+        const minPrice = Number(arrayList[3])
+        const maxPrice = Number(arrayList[4])
+
+        console.log("Props: " + brand + " | " + color.slice(1,color.length) + " | " + year + " | " + minPrice + " | " + maxPrice)
+
+
+
+        const payload = await filterVehiclesByParams(brand, color.slice(1,color.length), year, minPrice, maxPrice);
+        console.log(payload)
+
+        setVehicles(payload);
+        setTemFiltroForm(true)
+      } else {
+        const payload = await getVehicles();
+        setVehicles(payload);
+      }
+
+
       setChanged(false)
     };
 
     fetchVehicles();
-
   }, [changed]);
+
+
 
 
   useEffect(() => {
@@ -52,6 +81,14 @@ const VehiclesPage = () => {
 
   }
 
+  const removeFilter = () => {
+    setTemFiltroForm(false);
+    setChanged(true);
+
+    navigate('/');
+
+  }
+
   const handleChangeValue = async (value: string) => {
     setSearch(value)
 
@@ -69,11 +106,13 @@ const VehiclesPage = () => {
 
   return (
     <div className={styles.Vehicles}>
+
+
       <main className={styles.main}>
         <Search placeholder="Buscar" value={search} handleChangeValue={event => handleChangeValue(event)} />
 
-        <Button  text="Adicionar" onClick={navigateToAdd} />
-        <button className={styles.removeButton}>Remover filtros aplicados [x]</button>
+        <Button text="Adicionar" onClick={navigateToAdd} />
+        {temfiltroForm == true ? <button onClick={() => { removeFilter() }} className={styles.removeButton}>Remover filtros aplicados [x]</button> : <span></span>}
 
         <div className={styles.ContainerCardVehicles}>
 

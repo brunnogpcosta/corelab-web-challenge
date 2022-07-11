@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useContext, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
@@ -85,7 +85,6 @@ const BackButton = styled.button`
 `
 
 const NewCarForm = () => {
-    const [id, setId] = useState(3)
     const [name, setName] = useState('')
     const [brand, setBrand] = useState('')
     const [description, setDescription] = useState('')
@@ -93,8 +92,7 @@ const NewCarForm = () => {
     const [year, setYear] = useState(1900)
     const [price, setPrice] = useState(0)
     const [plate, setPlate] = useState('')
-    const [is_favorite, sets_favorite] = useState(false)
-    const [createdAt, setCreatedAt] = useState(new Date())
+    const [is_favorite, setIs_favorite] = useState(false)
 
     const navigate = useNavigate()
 
@@ -119,9 +117,7 @@ const NewCarForm = () => {
         }
         try {
             const vehicle = await postVehicles(data)
-
-            console.log(vehicle.id)
-
+           
             navigateToHome()
         }
 
