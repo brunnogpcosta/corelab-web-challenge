@@ -8,10 +8,23 @@
   .main {
     display: grid;
     gap: 1rem;
+
+
+    .removeButton {
+      width: 200px;
+      border-radius: 20px;
+      border: 1px solid #9e9d9d;
+      padding: 5px;
+      cursor: pointer;
+
+    
+    }
+
   }
 
   .ContainerCardVehicles {
     width: 100%;
+
 
 
     .favorites {
@@ -19,22 +32,22 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: baseline;
+      margin-top: 10px;
+    }
+
+    .allItens {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: baseline;
       margin-top: 30px;
     }
 
-      .allItens {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: baseline;
-        margin-top: 30px;
-      }
 
-  
-    h3{
+    h3 {
       width: 100%;
     }
-  
+
 
     @media(max-width: 800px) {
       width: 100%;

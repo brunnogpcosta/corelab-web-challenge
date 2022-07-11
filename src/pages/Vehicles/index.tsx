@@ -72,7 +72,8 @@ const VehiclesPage = () => {
       <main className={styles.main}>
         <Search placeholder="Buscar" value={search} handleChangeValue={event => handleChangeValue(event)} />
 
-        <Button text="Adicionar" onClick={navigateToAdd} />
+        <Button  text="Adicionar" onClick={navigateToAdd} />
+        <button className={styles.removeButton}>Remover filtros aplicados [x]</button>
 
         <div className={styles.ContainerCardVehicles}>
 
